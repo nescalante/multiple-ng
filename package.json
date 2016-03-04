@@ -1,0 +1,36 @@
+{
+  "name": "multiple-ng",
+  "version": "0.0.1",
+  "description": "Angular bootstrap multiple selector directive",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jshint src/*.js && jscs src/*.js",
+    "build": "npm run test && browserify -t brfs src/index.js -d -o dist/multiple-ng.js && uglify -s dist/multiple-ng.js -o dist/multiple-ng.min.js",
+    "preversion": "npm run build && git commit --allow-empty -am 'pre-release commit'",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nescalante/multiple-ng"
+  },
+  "keywords": [
+    "select",
+    "multiple",
+    "angular",
+    "bootstrap"
+  ],
+  "author": "Nicolas Escalante <nlante@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nescalante/multiple-ng/issues"
+  },
+  "homepage": "https://github.com/nescalante/multiple-ng",
+  "devDependencies": {
+    "brfs": "^1.4.3",
+    "browserify": "^13.0.0",
+    "jscs": "^2.11.0",
+    "jshint": "^2.9.1",
+    "uglify": "^0.1.5",
+    "watchify": "^3.3.1"
+  }
+}

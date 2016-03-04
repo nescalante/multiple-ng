@@ -1,0 +1,26 @@
+{
+  "name": "multiple-ng",
+  "description": "Angular bootstrap multiple selector directive",
+  "main": "dist/multiple-ng.js",
+  "authors": [
+    "Nicolas Escalante <nlante@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "select",
+    "multiple",
+    "angular",
+    "bootstrap"
+  ],
+  "homepage": "https://github.com/nescalante/multiple-ng",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
