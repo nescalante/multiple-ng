@@ -12,10 +12,12 @@ angular.module('multiple-select', ['ng'])
       scope: {
         sourceList: '=',
         itemLabel: '&',
+        buttonLabel: '&',
         isDisabled: '=',
         onItemClick: '&',
         onSelectAll: '&',
         onSelectNone: '&',
+        modelDescription: '=',
         selectAllLabel: '=',
         selectNoneLabel: '=',
         searchLabel: '='
@@ -73,7 +75,7 @@ angular.module('multiple-select', ['ng'])
 
         if (!attrs.buttonLabel) {
           scope.buttonLabel = function (items) {
-            return items && items.length ? items.length + ' items' : attrs.modelName;
+            return items && items.length ? items.length + ' items' : attrs.modelDescription;
           };
         }
 
