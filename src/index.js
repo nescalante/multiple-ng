@@ -4,8 +4,8 @@ var fs = require('fs');
 
 angular.module('multiple-select', ['ng'])
 .directive('multipleSelect', [
-  '$parse',
-  function ($parse) {
+  '$parse', '$document',
+  function ($parse, $document) {
     return {
       restrict: 'AE',
       require: '?ngModel',
@@ -17,6 +17,8 @@ angular.module('multiple-select', ['ng'])
         onItemClick: '&',
         onSelectAll: '&',
         onSelectNone: '&',
+        onOpen: '&',
+        onClose: '&',
         modelDescription: '=',
         selectAllLabel: '=',
         selectNoneLabel: '=',
@@ -24,6 +26,7 @@ angular.module('multiple-select', ['ng'])
       },
       template: fs.readFileSync(__dirname + '/template.html', 'utf8'),
       link: function (scope, element, attrs, ngModel) {
+        scope.isVisible = false;
         scope.helpers = {
           all: true,
           none: true,
@@ -37,6 +40,17 @@ angular.module('multiple-select', ['ng'])
         };
 
         scope.list = [];
+
+        $document[0].addEventListener('click', function (event) {
+          var target = event.target;
+
+          if (!isDescendant(element[0], target)) {
+            scope.$apply(function () {
+              scope.isVisible = false;
+              scope.onClose();
+            });
+          }
+        });
 
         scope.$watch(function () {
           return scope.sourceList;
@@ -57,19 +71,8 @@ angular.module('multiple-select', ['ng'])
           }
         });
 
-        scope.updateCheck = function (item) {
-          var model = scope.list
-            .filter(function (item) {
-              return item.isSelected;
-            })
-            .map(function (item) {
-              return item.getSourceItem();
-            });
-
-          ngModel.$setViewValue(model);
-          scope.onItemClick({ item: item.getSourceItem() });
-        };
-
+        scope.toggle = toggle;
+        scope.updateCheck = updateCheck;
         scope.selectAll = selectAll;
         scope.selectNone = selectNone;
 
@@ -84,6 +87,29 @@ angular.module('multiple-select', ['ng'])
         scope.$watch(function () {
           return ngModel.$modelValue;
         }, updateList, true);
+
+        function toggle() {
+          scope.isVisible = !scope.isVisible;
+
+          if (scope.isVisible) {
+            scope.onOpen();
+          } else {
+            scope.onClose();
+          }
+        }
+
+        function updateCheck(item) {
+          var model = scope.list
+            .filter(function (item) {
+              return item.isSelected;
+            })
+            .map(function (item) {
+              return item.getSourceItem();
+            });
+
+          ngModel.$setViewValue(model);
+          scope.onItemClick({ item: item.getSourceItem() });
+        }
 
         function selectAll() {
           ngModel.$setViewValue(scope.sourceList.slice());
@@ -109,6 +135,20 @@ angular.module('multiple-select', ['ng'])
           });
 
           refreshLabel();
+        }
+
+        function isDescendant(parent, child) {
+          var node = child.parentNode;
+
+          while (node !== null) {
+            if (node === parent) {
+              return true;
+            }
+
+            node = node.parentNode;
+          }
+
+          return false;
         }
       }
     };
