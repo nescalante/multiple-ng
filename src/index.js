@@ -13,27 +13,15 @@ angular.module('multiple-select', ['ng'])
         sourceList: '=',
         itemLabel: '&',
         isDisabled: '=',
-        onClear: '&',
         onItemClick: '&',
         onSelectAll: '&',
         onSelectNone: '&',
-        translation: '=',
         selectAllLabel: '=',
         selectNoneLabel: '=',
         searchLabel: '='
       },
       template: fs.readFileSync(__dirname + '/template.html', 'utf8'),
       link: function (scope, element, attrs, ngModel) {
-        scope.list = scope.sourceList.map(function (item) {
-          return {
-            label: scope.itemLabel(item),
-            isSelected: false,
-            getSourceItem: function () {
-              return item;
-            }
-          };
-        });
-
         scope.helpers = {
           all: true,
           none: true,
@@ -45,6 +33,27 @@ angular.module('multiple-select', ['ng'])
           selectNone: attrs.selectNoneLabel || 'Select none',
           search: attrs.searchLabel || 'Search'
         };
+
+        scope.list = [];
+
+        scope.$watch(function () {
+          return scope.sourceList;
+        }, function (source) {
+          if (scope.sourceList) {
+            scope.list = scope.sourceList.map(function (item) {
+              return {
+                label: scope.itemLabel(item),
+                isSelected: false,
+                getSourceItem: function () {
+                  return item;
+                }
+              };
+            });
+          }
+          else {
+            scope.list = [];
+          }
+        });
 
         scope.updateCheck = function () {
           var model = scope.list
