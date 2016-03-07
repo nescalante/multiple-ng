@@ -15,7 +15,7 @@
     <input placeholder="{{labels.search}}" type="text" class="form-control padding-right-lg" ng-show="helpers.filter" ng-model="search" />
     <div class="checkbox" ng-repeat="item in list | filter:search">
       <label>
-        <input type="checkbox" ng-model="item.isSelected" ng-change="updateCheck()" />
+        <input type="checkbox" ng-model="item.isSelected" ng-change="updateCheck(item)" />
         {{item.label}}
       </label>
     </div>

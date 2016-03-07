@@ -55,7 +55,7 @@ angular.module('multiple-select', ['ng'])
           }
         });
 
-        scope.updateCheck = function () {
+        scope.updateCheck = function (item) {
           var model = scope.list
             .filter(function (item) {
               return item.isSelected;
@@ -63,7 +63,9 @@ angular.module('multiple-select', ['ng'])
             .map(function (item) {
               return item.getSourceItem();
             });
+
           ngModel.$setViewValue(model);
+          scope.onItemClick({ item: item.getSourceItem() });
         };
 
         scope.selectAll = selectAll;
@@ -83,10 +85,12 @@ angular.module('multiple-select', ['ng'])
 
         function selectAll() {
           ngModel.$setViewValue(scope.sourceList.slice());
+          scope.onSelectAll();
         }
 
         function selectNone() {
           ngModel.$setViewValue([]);
+          scope.onSelectNone();
         }
 
         function refreshLabel() {
