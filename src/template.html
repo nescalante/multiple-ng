@@ -1,4 +1,4 @@
-<div class="dropdown dropdown-block">
+<div class="ng-multiple dropdown dropdown-block">
   <button type="button" class="btn btn-default dropdown-toggle" ng-click="isVisible = !isVisible" ng-disabled="isDisabled">
     {{parsedLabel}}
     <span class="caret"></span>
@@ -12,7 +12,7 @@
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       {{labels.selectNone}}
     </button>
-    <input placeholder="{{labels.search}}" type="text" class="form-control padding-right-lg" ng-show="helpers.filter" ng-model="search" />
+    <input placeholder="{{labels.search}}" type="text" class="form-control" ng-show="helpers.filter" ng-model="search" />
     <div class="checkbox" ng-repeat="item in list | filter:search">
       <label>
         <input type="checkbox" ng-model="item.isSelected" ng-change="updateCheck(item)" />

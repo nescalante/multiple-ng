@@ -6,10 +6,10 @@
   "scripts": {
     "test": "jshint src/*.js && jscs src/*.js",
     "start": "static . & watch \"npm run browserify\" src",
-    "build": "npm run test && npm run browserify",
+    "build": "npm run test && npm run browserify && cp src/styles.css dist/multiple-ng.css; cleancss dist/multiple-ng.css -o dist/multiple-ng.min.css",
     "browserify": "browserify -t brfs src/index.js -d -o dist/multiple-ng.js && uglify -s dist/multiple-ng.js -o dist/multiple-ng.min.js",
     "preversion": "npm run build && git commit --allow-empty -am 'pre-release commit'",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "brfs": "^1.4.3",
     "browserify": "^13.0.0",
+    "clean-css": "^3.4.10",
     "jscs": "^2.11.0",
     "jshint": "^2.9.1",
     "node-static": "^0.7.7",
