@@ -1,23 +1,27 @@
 <div class="ng-multiple dropdown dropdown-block">
-  <button type="button" class="btn btn-default dropdown-toggle" ng-click="toggle()" ng-disabled="isDisabled">
-    {{parsedLabel}}
+  <button type="button" class="btn btn-default dropdown-toggle" ng-click="isVisible = !isVisible" ng-disabled="isDisabled">
+    {{buttonLabel(ngModel)}}
     <span class="caret"></span>
   </button>
   <div role="menu" class="dropdown-menu" ng-class="{ show: isVisible }">
-    <button type="button" class="btn btn-default btn-sm" ng-if="helpers.all" ng-click="selectAll()">
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-      {{labels.selectAll}}
-    </button>
-    <button type="button" class="btn btn-default btn-sm" ng-if="helpers.none" ng-click="selectNone()">
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-      {{labels.selectNone}}
-    </button>
-    <input placeholder="{{labels.search}}" type="text" class="form-control" ng-show="helpers.filter" ng-model="search" />
-    <div class="checkbox" ng-repeat="item in list | filter:search">
-      <label>
-        <input type="checkbox" ng-model="item.isSelected" ng-change="updateCheck(item)" />
-        {{item.label}}
-      </label>
+    <div class="multi-select-options" ng-show="showSelectors">
+      <button type="button" class="btn btn-default btn-sm" ng-click="selectAll()">
+        {{selectAllLabel || 'Select all'}}
+      </button>
+      <button type="button" class="btn btn-default btn-sm" ng-click="selectNone()" ng-disabled="!ngModel.length">
+        {{selectNoneLabel || 'Select none'}}
+      </button>
+    </div>
+    <input placeholder="{{searchLabel || 'Search'}}" type="text" class="form-control padding-right-lg" ng-model="search" />
+    <ul>
+      <li ng-repeat="item in items | filter:search">
+        <div class="checkbox">
+          <input id="{{itemLabel(item) + $index}}" type="checkbox"
+            ng-checked="ngModel.indexOf(item) > -1"
+            ng-click="toggleSelection(item)" />
+          <label for="{{itemLabel(item) + $index}}">{{itemLabel(item)}}</label>
+        </div>
+      </li>
     </div>
   </div>
 </div>
