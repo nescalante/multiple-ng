@@ -2,11 +2,11 @@
 
 > Angular bootstrap multiple selector directive
 
-# Working example
+## Working example
 
 [http://nescalante.github.io/multiple-ng](http://nescalante.github.io/multiple-ng)
 
-# Install
+## Install
 
 Use it as an npm package:
 
@@ -20,7 +20,7 @@ Or just download it from bower
 bower install multiple-ng --save
 ```
 
-# Usage
+## Usage
 
 ```html
 <multiple-select type="text"
@@ -30,6 +30,6 @@ bower install multiple-ng --save
   button-label="a-label-to-display-in-the-button" />
 ```
 
-# License
+## License
 
 MIT
