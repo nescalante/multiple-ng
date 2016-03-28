@@ -21,9 +21,9 @@ bower install multiple-ng --save
 ```html
 <multiple-select type="text"
   ng-model="a-model"
-  source-list="the-source-where-the-items-come-from"
+  items="the-source-where-the-items-come-from"
   item-label="the-property-to-show"
-  model-description="a-label-to-display-in-the-button" />
+  button-label="a-label-to-display-in-the-button" />
 ```
 
 # License
