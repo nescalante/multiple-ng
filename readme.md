@@ -2,6 +2,10 @@
 
 > Angular bootstrap multiple selector directive
 
+# Working example
+
+[http://nescalante.github.io/multiple-ng](http://nescalante.github.io/multiple-ng)
+
 # Install
 
 Use it as an npm package:
