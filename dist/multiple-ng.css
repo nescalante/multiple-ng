@@ -5,3 +5,7 @@
 .ng-multiple .dropdown-menu > input {
   margin: 5px 0;
 }
+
+.ng-multiple .dropdown-menu > ul {
+  padding-left: 30px;
+}
