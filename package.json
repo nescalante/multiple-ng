@@ -29,13 +29,13 @@
   "homepage": "https://github.com/nescalante/multiple-ng",
   "devDependencies": {
     "brfs": "^1.4.3",
-    "browserify": "^13.0.0",
-    "clean-css": "^3.4.10",
-    "jscs": "^2.11.0",
+    "browserify": "^14.1.0",
+    "clean-css": "^4.0.10",
+    "jscs": "^3.0.7",
     "jshint": "^2.9.1",
     "node-static": "^0.7.7",
     "uglify": "^0.1.5",
-    "watch": "^0.17.1",
+    "watch": "^1.0.2",
     "watchify": "^3.3.1"
   },
   "dependencies": {
